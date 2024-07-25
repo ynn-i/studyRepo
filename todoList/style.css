@@ -1,0 +1,25 @@
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    padding: 8px 12px;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+/* reset */
+body,
+h1,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+button {
+    cursor: pointer;
+    border: none;
+}
