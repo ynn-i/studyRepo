@@ -3,6 +3,7 @@ const url = 'http://localhost:3001/todos';
 const list = document.querySelector('.list');
 const addBtn = document.querySelector('.add-btn');
 const addInp = document.querySelector('.add-inp');
+const form = document.querySelector('form');
 
 // todo Ui
 const createTodoUi = (todoData) => {
@@ -31,10 +32,34 @@ const getTodos = async () => {
     const todoDatas = await res.json();
     return todoDatas;
 };
-const initTodo = async function () {
+const initTodo = async () => {
     const todoDatas = await getTodos();
     todoDatas.forEach((todoData) => {
         createTodoUi(todoData);
     });
 };
 initTodo();
+
+// todo 추가하기
+const addTodo = async (todoText) => {
+    try {
+        const req = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ todo: todoText, status: false }),
+        });
+        const newTodoData = await req.json();
+        return newTodoData;
+    } catch (error) {
+        alert('server error');
+    }
+};
+
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const todoText = addInp.value;
+    const newTodoData = await addTodo(todoText);
+    createTodoUi(newTodoData);
+});
