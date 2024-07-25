@@ -1,25 +1,111 @@
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+}
+
 header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e9edf1;
+}
+header h1 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+article {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+input[type='text'] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #222;
+    border: 1px solid #bec9d5;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+input[type='text']::placeholder {
+    color: #7c828b;
+}
+input[type='text']:active,
+input[type='text']:focus {
+    border: 1px solid #222;
 }
 
 button {
-    padding: 8px 12px;
-    margin: 0;
+    padding: 6px 8px;
     box-sizing: border-box;
     border-radius: 4px;
+    font-size: 14px;
+}
+.delBtn {
+    background-color: #ffebea;
+    color: #ea5454;
+}
+.editBtn {
+    background-color: #eceff0;
+    color: #5780bd;
 }
 
-/* reset */
+.list {
+    font-size: 16px;
+    margin-top: 20px;
+}
+.todo {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.todoText {
+    flex: 1;
+}
+
+/* reset style */
+body {
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+    line-height: 1.4;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 1.6rem;
+}
 body,
-h1,
-ul,
-li {
+h1 {
     margin: 0;
     padding: 0;
-    line-height: 1;
+    list-style: none;
+    color: #222;
+}
+ol,
+ul,
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 button {
+    margin: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-family: inherit;
     cursor: pointer;
-    border: none;
+}
+input {
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+input[type='checkbox'] {
+    display: none;
 }

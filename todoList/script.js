@@ -1,22 +1,25 @@
 const url = 'http://localhost:3001/todos';
 
 const list = document.querySelector('.list');
-const addBtn = document.querySelector('.add-btn');
 const addInp = document.querySelector('.add-inp');
 const form = document.querySelector('form');
 
 // todo Ui
 const createTodoUi = (todoData) => {
     const $li = document.createElement('li');
+    $li.classList.add('todo');
     const $todoText = document.createElement('span');
+    $todoText.classList.add('todoText');
     const $delBtn = document.createElement('button');
-    $delBtn.textContent = 'delete';
+    $delBtn.textContent = 'del';
+    $delBtn.classList.add('delBtn');
     const $editBtn = document.createElement('button');
     $editBtn.textContent = 'edit';
+    $editBtn.classList.add('editBtn');
     const $checkbox = document.createElement('input');
     $checkbox.setAttribute('type', 'checkbox');
-    $checkbox.classList.add('edit-checkbox');
     $checkbox.checked = todoData.done;
+    $checkbox.classList.add('edit-checkbox');
 
     $todoText.textContent = todoData.todo;
     list.appendChild($li);
