@@ -1,19 +1,19 @@
 {
-  "todos": [
-    {
-      "id": "2",
-      "todo": "투두리스트 실습 공부하기 2",
-      "status": "false"
-    },
-    {
-      "id": "3a2f",
-      "todo": "연습 3",
-      "status": false
-    },
-    {
-      "id": "c2fa",
-      "todo": "sssss",
-      "status": false
-    }
-  ]
+    "todos": [
+        {
+            "id": 1,
+            "todo": "투두리스트 실습 공부하기 1",
+            "status": "false"
+        },
+        {
+            "id": 2,
+            "todo": "투두리스트 실습 공부하기 3",
+            "status": "false"
+        },
+        {
+            "id": 3,
+            "todo": "투두리스트 실습 공부하기 1",
+            "status": "false"
+        }
+    ]
 }

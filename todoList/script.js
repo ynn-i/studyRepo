@@ -4,6 +4,10 @@ const list = document.querySelector('.list');
 const addInp = document.querySelector('.add-inp');
 const form = document.querySelector('form');
 
+const modal = document.querySelector('.edit-modal');
+const editInp = document.getElementById('edit-inp');
+const editForm = document.getElementById('edit-form');
+
 // todo Ui
 const createTodoUi = (todoData) => {
     const $li = document.createElement('li');
@@ -76,7 +80,8 @@ const delTodo = async (id) => {
         });
         return res.status === 200;
     } catch (error) {
-        alert('잘못된.');
+        alert('삭제 중 오류가 발생했습니다.');
+        return null;
     }
 };
 
@@ -87,7 +92,61 @@ list.addEventListener('click', async (event) => {
         if (isDel) {
             parentNode.remove();
         } else {
-            alert('잘못된 요청입니다.');
+            alert('삭제 중 오류가 발생했습니다.');
         }
     }
 });
+
+// todo 수정하기
+const updateTodo = async (id, newTodoText) => {
+    try {
+        const res = await fetch(`${url}/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ todo: newTodoText }),
+        });
+        if (res.status === 200) {
+            return await res.json();
+        } else {
+            throw new Error('서버 응답 오류');
+        }
+    } catch (error) {
+        alert('수정 중 오류가 발생했습니다.');
+        return null;
+    }
+};
+
+let currentEditingId = null;
+
+list.addEventListener('click', (event) => {
+    if (event.target.classList.contains('editBtn')) {
+        const parentNode = event.target.parentNode;
+        const todoText = parentNode.querySelector('.todoText').textContent;
+        currentEditingId = parentNode.id;
+
+        modal.style.display = 'block';
+        editInp.value = todoText;
+        editInp.focus();
+    }
+});
+
+editForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const newTodoText = editInp.value.trim();
+    if (newTodoText && currentEditingId) {
+        const updatedTodo = await updateTodo(currentEditingId, newTodoText);
+        if (updatedTodo) {
+            const todoElement = document.getElementById(currentEditingId);
+            todoElement.querySelector('.todoText').textContent = newTodoText;
+            modal.style.display = 'none';
+        }
+    }
+});
+
+window.onclick = (event) => {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+};
