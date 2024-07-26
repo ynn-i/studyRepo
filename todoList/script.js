@@ -1,4 +1,4 @@
-const url = 'http://localhost:3001/todos';
+const url = 'http://localhost:3000/todos';
 
 const list = document.querySelector('.list');
 const addInp = document.querySelector('.add-inp');
@@ -8,6 +8,7 @@ const form = document.querySelector('form');
 const createTodoUi = (todoData) => {
     const $li = document.createElement('li');
     $li.classList.add('todo');
+    $li.id = todoData.id;
     const $todoText = document.createElement('span');
     $todoText.classList.add('todoText');
     const $delBtn = document.createElement('button');
@@ -65,4 +66,28 @@ form.addEventListener('submit', async (event) => {
     const todoText = addInp.value;
     const newTodoData = await addTodo(todoText);
     createTodoUi(newTodoData);
+});
+
+// todo 삭제하기
+const delTodo = async (id) => {
+    try {
+        const res = await fetch(`${url}/${id}`, {
+            method: 'DELETE',
+        });
+        return res.status === 200;
+    } catch (error) {
+        alert('잘못된.');
+    }
+};
+
+list.addEventListener('click', async (event) => {
+    if (event.target.classList.contains('delBtn')) {
+        const parentNode = event.target.parentNode;
+        const isDel = await delTodo(parentNode.id);
+        if (isDel) {
+            parentNode.remove();
+        } else {
+            alert('잘못된 요청입니다.');
+        }
+    }
 });
